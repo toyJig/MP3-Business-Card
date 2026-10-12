@@ -19,7 +19,6 @@ void Mp3Player::playMusicFromPCM(){
         if (pcm_queue.size() > 0){
             DAC.write_to_DAC(DAC::DAC_config_ON_regA, pcm_queue.front());
             pcm_queue.pop();
-            sleep_ms(1); //temp
         }
     }
 }

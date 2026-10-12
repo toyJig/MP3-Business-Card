@@ -76,7 +76,7 @@ int main() {
 
     while (bytes_left > 0) {
         const uint16_t queueSize = Mp3Player1.getPCMQueueSize();
-        if (Mp3Player1.getPCMQueueSize() < 100){
+        if (Mp3Player1.getPCMQueueSize() < 30000){
             do {
                 int sync_offset {MP3FindSyncWord(read_ptr, bytes_left)};
                 if (sync_offset < 0) {
@@ -101,7 +101,7 @@ int main() {
                         bytes_left--;
                     }
                 }
-            } while (queueSize < 1000);
+            } while (queueSize < 60000);
 
             if (!Mp3Player1.isPlaying){
                 multicore_launch_core1(core1Wrapper);
