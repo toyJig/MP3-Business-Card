@@ -1,7 +1,6 @@
 #pragma once
 #include <cstdint>
 #include <queue>
-#include <list>
 #include "DAC.hpp"
 #include "mp3dec.h"
 
@@ -17,6 +16,7 @@ public:
 
     Mp3Player(DAC_C DAC);
     
+    void init();
     void playMusicFromPCM();
     void addPCMToQueue(int16_t pcmBuffer[], MP3FrameInfo frame_info);
 
