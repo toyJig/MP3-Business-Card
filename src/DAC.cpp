@@ -17,9 +17,9 @@ void DAC_C::fillSineTable() {
     }
 }
 
-// Config should be 4 bits, data should be 12 bits for MCP4822
-void DAC_C::write_to_DAC(const std::uint8_t config, const std::uint16_t data) {
-    std::uint8_t msg[2];
+// Config should be 4 bits, data should be *12 bits* for MCP4822
+void DAC_C::write_to_DAC(const uint8_t config, const uint16_t data) {
+    uint8_t msg[2];
 
     msg[0] = config | ((data >> 8) & 0x0F);
     msg[1] = data & 0xFF;

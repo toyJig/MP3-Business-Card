@@ -19,11 +19,11 @@ private:
     int PIN_SCK;
 
     void fillSineTable();
-    void write_to_DAC(const std::uint8_t config, const std::uint16_t data);
-
+    
 public:
     DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SDI, int PIN_SCK, double Amplitude);
     void generateAC_Wave(double Hz);
+    void write_to_DAC(const uint8_t config, const uint16_t data);
     void init();
 };
 
@@ -48,10 +48,10 @@ namespace DAC {
     inline constexpr double B4{ 493.88 };
     inline constexpr double C5{ 523.25 };
 
-    inline constexpr std::uint8_t DAC_config_ON_regA{ 0b0001'0000 };
-    inline constexpr std::uint8_t DAC_config_ON_regB{ 0b1001'0000 };
-    inline constexpr std::uint8_t DAC_config_OFF_regA{ 0b0000'0000 };
-    inline constexpr std::uint8_t DAC_config_OFF_regB{ 0b1000'0000 };
+    inline constexpr uint8_t DAC_config_ON_regA{ 0b0001'0000 };
+    inline constexpr uint8_t DAC_config_ON_regB{ 0b1001'0000 };
+    inline constexpr uint8_t DAC_config_OFF_regA{ 0b0000'0000 };
+    inline constexpr uint8_t DAC_config_OFF_regB{ 0b1000'0000 };
 
     inline constexpr double PEAK_AMP_NO_CLIPPING{ 0.805664062 }; //gives theoretical peak voltage w/o clipping (3.3v)
 }  // namespace DAC
