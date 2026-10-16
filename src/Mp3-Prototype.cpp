@@ -28,9 +28,10 @@ double Amplitude{ 1.0 };
 DAC_C DAC1 {DAC_C(SPI_PORT, PIN_CS, PIN_MOSI, PIN_SCK, Amplitude)};
 //init Mp3Player
 Mp3Player Mp3Player1 { Mp3Player(DAC1) };
+MP3FrameInfo frame_info;
 
 void core1Wrapper(){
-    Mp3Player1.playMusicFromPCM();
+    Mp3Player1.playMusicFromPCM(frame_info);
 }
 
 int main() {
@@ -70,9 +71,6 @@ int main() {
         printf("Error: MP3 decoder initialization failed\n");
         return -1;
     }
-
-    
-    MP3FrameInfo frame_info;
 
     while (bytes_left > 0) {
         const uint16_t queueSize = Mp3Player1.getPCMQueueSize();

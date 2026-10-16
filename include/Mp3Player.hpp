@@ -10,14 +10,14 @@ private:
     std::queue<uint16_t> pcm_queue;
     DAC_C DAC;
 
-    uint16_t mult_uint16_to_12(uint16_t n16bits);
+    uint16_t mult_uint16_to_12(int16_t n16bits);
 public:
     bool isPlaying;
 
     Mp3Player(DAC_C DAC);
     
     void init();
-    void playMusicFromPCM();
+    void playMusicFromPCM(MP3FrameInfo frame_info);
     void addPCMToQueue(int16_t pcmBuffer[], MP3FrameInfo frame_info);
 
     uint16_t getPCMQueueSize();
