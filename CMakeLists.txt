@@ -76,6 +76,7 @@ target_link_libraries(Mp3-Prototype
     hardware_i2c
     hardware_spi
     hardware_adc
+    hardware_dma
     pico_multicore
     picomp3lib #helix decoder lib
 )

@@ -6,6 +6,7 @@
 #include "hardware/spi.h"
 #include "pico/stdlib.h"
 #include "pico/multicore.h"
+#include "hardware/dma.h"
 // #include "hardware/adc.h"
 
 #include "DAC.hpp"
@@ -37,7 +38,7 @@ void core1Wrapper(){
 int main() {
     stdio_init_all();
 
-    spi_init(SPI_PORT, 2e6);  // 2MHz SPI
+    spi_init(SPI_PORT, 2e7);  // 20MHz SPI
     spi_set_format(SPI_PORT, 8, SPI_CPOL_0, SPI_CPHA_0, SPI_MSB_FIRST);
 
     gpio_init(PIN_CS);
@@ -64,7 +65,7 @@ int main() {
     const unsigned char* mp3_bytes_ptr {audio_mp3};
     const size_t mp3_size {audio_mp3_size};
     unsigned char* read_ptr = {(unsigned char*)mp3_bytes_ptr};
-    int bytes_left {mp3_size};
+    int bytes_left {static_cast<int>(mp3_size)};
 
     HMP3Decoder hMP3Decoder {MP3InitDecoder()};
     if (!hMP3Decoder) {
@@ -74,41 +75,38 @@ int main() {
 
     while (bytes_left > 0) {
         const uint16_t queueSize = Mp3Player1.getPCMQueueSize();
-        if (Mp3Player1.getPCMQueueSize() < 30000){
-            do {
-                int sync_offset {MP3FindSyncWord(read_ptr, bytes_left)};
-                if (sync_offset < 0) {
-                    break; // No more sync words, can't continue mp3.
-                }
-                read_ptr += sync_offset;
-                bytes_left -= sync_offset;
-
-                //decode 1 frame
-                int err {MP3Decode(hMP3Decoder, &read_ptr, &bytes_left, pcm_buffer, 0)};
-                if (err == ERR_MP3_NONE){
-                    MP3GetLastFrameInfo(hMP3Decoder, &frame_info);
-                    int total_samples {frame_info.outputSamps};
-                    
-                    //send data to Mp3Player PWM Queue
-                    Mp3Player1.addPCMToQueue(pcm_buffer, frame_info);
-                } else if (err == ERR_MP3_INDATA_UNDERFLOW){
-                    break;
-                } else { // other mp3 errors -> skip
-                    if (bytes_left > 0) {
-                        read_ptr++;
-                        bytes_left--;
-                    }
-                }
-            } while (queueSize < 60000);
-
-            if (!Mp3Player1.isPlaying){
-                multicore_launch_core1(core1Wrapper);
+        while ( true ){
+            int sync_offset {MP3FindSyncWord(read_ptr, bytes_left)};
+            if (sync_offset < 0) {
+                break; // No more sync words, can't continue mp3.
             }
+            read_ptr += sync_offset;
+            bytes_left -= sync_offset;
+
+            //decode 1 frame
+            int err {MP3Decode(hMP3Decoder, &read_ptr, &bytes_left, pcm_buffer, 0)};
+            if (err == ERR_MP3_NONE){
+                MP3GetLastFrameInfo(hMP3Decoder, &frame_info);
+                int total_samples {frame_info.outputSamps};
+                
+                //send data to Mp3Player PWM Queue
+                Mp3Player1.addPCMToQueue(pcm_buffer, frame_info);
+            } else if (err == ERR_MP3_INDATA_UNDERFLOW){
+                break;
+            } else { // other mp3 errors -> skip
+                if (bytes_left > 0) {
+                    read_ptr++;
+                    bytes_left--;
+                }
+            }
+        } 
+
+        if (!Mp3Player1.isPlaying){
+            multicore_launch_core1(core1Wrapper);
         }
+
     }
     
     MP3FreeDecoder(hMP3Decoder);
-
-    printf("SONG DONE!!!\n");
-    fflush(stdout);
+    printf("Decoding done!\n");
 }

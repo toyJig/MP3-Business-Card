@@ -16,23 +16,25 @@ void Mp3Player::playMusicFromPCM(const MP3FrameInfo frame_info){
     const uint32_t sample_period_us {
         1000000u / static_cast<uint32_t>(frame_info.samprate)
     };
-    printf("Samp period: %u", sample_period_us);
+    printf("Starting playback loop w/ Sample Period: %u", sample_period_us);
     isPlaying = true;
 
     while (true) {
-        const uint32_t start_time { time_us_32() };
         if (pcm_queue.size() > 0){
+            const uint32_t start_time { time_us_32() };
+
             DAC.write_to_DAC(DAC::DAC_config_ON_regA, pcm_queue.front());
             pcm_queue.pop();
+
+            const uint32_t timeElapsed {time_us_32() - start_time};
+            if (timeElapsed < sample_period_us){
+                busy_wait_us_32(std::max(static_cast<uint32_t>(0), sample_period_us - timeElapsed));
+            }
         }else{
             break;
         }
-        const uint32_t timeElapsed {time_us_32() - start_time};
-        if (timeElapsed < sample_period_us){
-            busy_wait_us_32(std::max(static_cast<uint32_t>(0), sample_period_us - timeElapsed));
-        }
     }
-    printf("penis");
+    printf("Playback loop finished!\n");
     isPlaying = false;
     return;
 }
