@@ -38,6 +38,7 @@ pico_sdk_init()
 file(GLOB SRC_FILES CONFIGURE_DEPENDS 
     "src/*.cpp" 
     "src/*.c" 
+    "src/*.tpp" 
     "include/*.hpp"
     "include/*.h"
 )
@@ -76,6 +77,7 @@ target_link_libraries(Mp3-Prototype
     hardware_i2c
     hardware_spi
     hardware_adc
+    hardware_pio
     pico_multicore
     picomp3lib #helix decoder lib
 )
