@@ -1,33 +1,39 @@
 #pragma once
+
+#include <vector>
 #include <cstdint>
 #include "DAC.hpp"
 #include "mp3dec.h"
-#include <array>
-// #include <vector>
-// #include <queue>
+#include "hardware/pio.h"
 
-// inline constexpr int MAX_PCM_SAMPLES (1152 * 2); // mp3 format specifies 1152 samples/s & Stereo (2 channels)
-inline constexpr int MAX_PCM_SAMPLES (1152); // mp3 format specifies 1152 samples/s & Stereo (2 channels)
+// mp3 format specifies 1152 samples/s & Stereo (2 channels)
+inline constexpr int MAX_PCM_SAMPLES (1152 * 2); 
 
 class Mp3Player {
 private:
     DAC_C DAC;
+    inline static std::vector<uint16_t> pcm_buffer1;
+    inline static std::vector<uint16_t> pcm_buffer2;
+    inline static int outputSamps;
+    double amplitude;
+    
+    // PIO STATE MACHINE
+    PIO pio;
+    uint offset;
+    pio_sm_config pio_config;
+    uint sm;
+    
+    static void DMA_done_handler();
     uint16_t mult_uint16_to_12(int16_t n16bits);
-    std::array<uint16_t, MAX_PCM_SAMPLES> & pcm_queue1;
-    std::array<uint16_t, MAX_PCM_SAMPLES> & pcm_queue2;
-    size_t pcm_queue_size;
 public:
     bool isPlaying;
-    volatile bool buffer_1_needs_refill;
-    volatile bool buffer_2_needs_refill;
+    inline static volatile bool buffer_1_needs_refill;
+    inline static volatile bool buffer_2_needs_refill;
 
-    Mp3Player(DAC_C DAC, std::array<uint16_t, MAX_PCM_SAMPLES>& pcm_queue1, std::array<uint16_t, MAX_PCM_SAMPLES> & pcm_queue2);
-    
+    Mp3Player(DAC_C DAC, double amplitude = 0.10);
+
     void init();
-    void play(int control_channel);
-    void playMusicFromPCM(MP3FrameInfo frame_info);
+    void play(MP3FrameInfo frame_info);
+    void stop();
     void addPCMToQueue(int16_t pcmBuffer[], MP3FrameInfo frame_info);
-
-    // uint16_t getPCMQueueSize();
 };
-

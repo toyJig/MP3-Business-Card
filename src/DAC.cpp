@@ -1,9 +1,7 @@
 
 #include "DAC.hpp"
 
-// #include "hardware/adc.h"
 #include "hardware/gpio.h"
-
 #include <math.h>
 #include <stdio.h>
 #include <numbers>
@@ -29,8 +27,8 @@ void DAC_C::write_to_DAC(const uint16_t config, const uint16_t data) {
     gpio_put(PIN_CS, 1);
 }
 
-DAC_C::DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SDI, int PIN_SCK, double Amplitude)
-    : spi(spi), PIN_CS(PIN_CS), PIN_SDI(PIN_SDI), PIN_SCK(PIN_SCK), Amplitude(Amplitude) {};
+DAC_C::DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SCK, int PIN_MOSI, double Amplitude)
+    : spi(spi), PIN_CS(PIN_CS), PIN_SCK(PIN_SCK), PIN_MOSI(PIN_MOSI), Amplitude(Amplitude) {};
 
 void DAC_C::generateAC_Wave(double Hz) {
     printf("Sin val 1 = %u", sin_table[1]);

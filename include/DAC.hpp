@@ -2,7 +2,6 @@
 
 #include "hardware/spi.h"
 #include "pico/stdlib.h"
-
 #include <cstdint>
 
 #define SINE_SAMPLES 4096  // 2^12
@@ -13,15 +12,15 @@ private:
     inline static uint16_t sin_table[SINE_SAMPLES];
     double Amplitude;
 
+    void fillSineTable();
+
+public:
     spi_inst_t* spi;
     int PIN_CS;
-    int PIN_SDI;
     int PIN_SCK;
+    int PIN_MOSI;
 
-    void fillSineTable();
-    
-public:
-    DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SDI, int PIN_SCK, double Amplitude);
+    DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SCK, int PIN_MOSI, double Amplitude);
     void generateAC_Wave(double Hz);
     void write_to_DAC(const uint16_t config, const uint16_t data);
     void init();
@@ -29,8 +28,8 @@ public:
 
 namespace DAC {
     // DAC bit configurations
-    inline constexpr uint16_t DAC_config_ON_regA{ 0b0001'0000'0000'0000 };
-    inline constexpr uint16_t DAC_config_ON_regB{ 0b1001'0000'0000'0000 };
+    inline constexpr uint16_t DAC_config_ON_regA{ 0b0011'0000'0000'0000 };
+    inline constexpr uint16_t DAC_config_ON_regB{ 0b1011'0000'0000'0000 };
     inline constexpr uint16_t DAC_config_OFF_regA{ 0b0000'0000'0000'0000 };
     inline constexpr uint16_t DAC_config_OFF_regB{ 0b1000'0000'0000'0000 };
 
