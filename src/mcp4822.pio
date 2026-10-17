@@ -1,0 +1,14 @@
+.program mcp_4822_spi
+.side_set 2                         ; Bit 1 = CS, Bit 0 = SCK
+                                    ; CS is Active Low. SCK idles low (SPI Mode 0).
+
+.wrap_target
+    pull block          side 0b10   ; CS high, SCK low
+
+    set x, 15           side 0b00   ; CS low, SCK low
+bit_loop:
+    out pins, 1         side 0b00   ; CS low, SCK low    
+    jmp x-- bit_loop    side 0b01   ; CS low, SCK high  mcp4822 expects SCK high reading data
+
+    nop                 side 0b10   ; CS high SCK low 
+.wrap

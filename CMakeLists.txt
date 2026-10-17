@@ -62,6 +62,9 @@ target_include_directories(Mp3-Prototype PRIVATE
 
 #include helix mp3 decoder library folder
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/lib/picomp3lib/src)
+#auto generate header for the DAC pio
+pico_generate_pio_header(Mp3-Prototype ${CMAKE_CURRENT_LIST_DIR}/src/mcp4822.pio)
+
 
 pico_set_program_name(Mp3-Prototype "Mp3-Prototype")
 pico_set_program_version(Mp3-Prototype "0.1")
@@ -77,6 +80,8 @@ target_link_libraries(Mp3-Prototype
     hardware_spi
     hardware_adc
     hardware_dma
+    hardware_pio
+    hardware_clocks
     pico_multicore
     picomp3lib #helix decoder lib
 )
