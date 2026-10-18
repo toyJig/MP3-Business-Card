@@ -1,0 +1,3 @@
+[submodule "picomp3lib-snake"]
+	path = lib/picomp3lib-snake
+	url = https://github.com/toyJig/picomp3lib-snake
