@@ -4,15 +4,15 @@
 #include "pico/stdlib.h"
 #include <cstdint>
 
-#define SINE_SAMPLES 4096  // 2^12
-inline constexpr double two_pi{ 3.1415926535898 * 2 };
+inline constexpr int SINE_SAMPLES{ 4096 };
+inline constexpr double two_pi{ 3.1415926535898 * 2.0 };
 
 class DAC_C {
 private:
     inline static uint16_t sin_table[SINE_SAMPLES];
     double Amplitude;
 
-    void fillSineTable();
+    void fill_sine_table();
 
 public:
     spi_inst_t* spi;
@@ -21,7 +21,7 @@ public:
     int PIN_MOSI;
 
     DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SCK, int PIN_MOSI, double Amplitude);
-    void generateAC_Wave(double Hz);
+    void generate_AC_wave(double Hz);
     void write_to_DAC(const uint16_t config, const uint16_t data);
     void init();
 };

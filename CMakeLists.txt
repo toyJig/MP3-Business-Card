@@ -78,7 +78,6 @@ target_link_libraries(Mp3-Prototype
     pico_stdlib
     hardware_i2c
     hardware_spi
-    hardware_adc
     hardware_dma
     hardware_pio
     hardware_clocks

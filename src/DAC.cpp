@@ -7,7 +7,7 @@
 #include <numbers>
 
 // Prefills sin_table with compputed 0-2^12 in 16 bit binary
-void DAC_C::fillSineTable() {
+void DAC_C::fill_sine_table() {
     double c{ two_pi / (SINE_SAMPLES - 1) };
     for (size_t i = 0; i < SINE_SAMPLES; i++) {
         sin_table[i] =
@@ -30,7 +30,7 @@ void DAC_C::write_to_DAC(const uint16_t config, const uint16_t data) {
 DAC_C::DAC_C(spi_inst_t* spi, int PIN_CS, int PIN_SCK, int PIN_MOSI, double Amplitude)
     : spi(spi), PIN_CS(PIN_CS), PIN_SCK(PIN_SCK), PIN_MOSI(PIN_MOSI), Amplitude(Amplitude) {};
 
-void DAC_C::generateAC_Wave(double Hz) {
+void DAC_C::generate_AC_wave(double Hz) {
     printf("Sin val 1 = %u", sin_table[1]);
 
     uint32_t lastTime{ time_us_32() };
@@ -61,4 +61,4 @@ void DAC_C::generateAC_Wave(double Hz) {
     }
 }
 
-void DAC_C::init() { fillSineTable(); }
+void DAC_C::init() { fill_sine_table(); }

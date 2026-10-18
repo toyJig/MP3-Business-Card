@@ -3,8 +3,8 @@
 #include "pico/multicore.h"
 #include "pico/stdlib.h"
 
-#include "DAC.hpp"
-#include "Mp3Player.hpp"
+#include "dac.hpp"
+#include "mp3_player.hpp"
 
 // Generated in CMakeLists as a stable embedded binary blob.
 #include "mp3dec.h"
@@ -24,7 +24,7 @@ Mp3Player Mp3Player1{ Mp3Player(DAC1, Amplitude) };
 
 int main() {
     stdio_init_all();
-    // sleep_ms(2000);  // wait for usb serial monitor
+    sleep_ms(2000);  // wait for usb serial monitor
 
     // init helix mp3 decoder
     int16_t pcm_decoder_buffer[MAX_PCM_SAMPLES];
@@ -32,15 +32,15 @@ int main() {
     const size_t mp3_size{ audio_mp3_size };
     unsigned char* read_ptr = { (unsigned char*)mp3_bytes_ptr };
     int bytes_left{ static_cast<int>(mp3_size) };
-    
+
     MP3FrameInfo frame_info;
-    HMP3Decoder hMP3Decoder{ MP3InitDecoder() };
+    HMP3Decoder hMP3Decoder{ MP3_init_decoder() };
     if (!hMP3Decoder) {
         printf("Error: MP3 decoder initialization failed\n");
         return -1;
     }
     while (bytes_left > 0) {
-        int sync_offset{ MP3FindSyncWord(read_ptr, bytes_left) };
+        int sync_offset{ MP3_find_sync_word(read_ptr, bytes_left) };
         if (sync_offset < 0) {
             break;  // No more sync words, can't continue mp3.
         }
@@ -48,13 +48,13 @@ int main() {
         bytes_left -= sync_offset;
 
         // decode 1 frame
-        int err{ MP3Decode(hMP3Decoder, &read_ptr, &bytes_left, pcm_decoder_buffer, 0) };
+        int err{ MP3_decode(hMP3Decoder, &read_ptr, &bytes_left, pcm_decoder_buffer, 0) };
         if (err == ERR_MP3_NONE) {
-            MP3GetLastFrameInfo(hMP3Decoder, &frame_info);
+            MP3_get_last_frame_info(hMP3Decoder, &frame_info);
             int total_samples{ frame_info.outputSamps };
 
             // send data to Mp3Player PCM buffers. Stalls if both buffers are full.
-            Mp3Player1.addPCMToQueue(pcm_decoder_buffer, frame_info);
+            Mp3Player1.add_PCM_to_queue(pcm_decoder_buffer, frame_info);
             if (!Mp3Player1.isPlaying) {
                 Mp3Player1.play(frame_info);
             }
@@ -68,7 +68,7 @@ int main() {
         }
     }
 
-    MP3FreeDecoder(hMP3Decoder);
+    MP3_free_decoder(hMP3Decoder);
     Mp3Player1.stop();
 
     printf("SONG DONE! :D\n");
