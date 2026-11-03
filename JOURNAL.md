@@ -117,7 +117,7 @@ As you can see, I'm just missing a 3v3 and gnd connection...
 And here's the 3d preview:
 ![image](https://halflife.hackclub-assets.com/sessions/A1g9crjQinL4h8m4FayIpcASMHZiPgLG/01b48b0ed1f5ce10bb24d04463e2bb04b911ae83118ae2c172dd654de156d659.png)
 
-I took some inspiration from Toby Fox's stupid business card design:
+I took some inspiration from Toby Fox's stupid business card design (just a funny placeholder):
 ![image](https://halflife.hackclub-assets.com/sessions/A1g9crjQinL4h8m4FayIpcASMHZiPgLG/0a8d7b2befc9ca5bd7495a3c78b66babbe6806778868a648ca7de36fa9783a73.png)
 
 But this is just a placeholder. I'm going to actually add my contact details  (unlike Toby, unfortunately) and add more decoration to it soon.
