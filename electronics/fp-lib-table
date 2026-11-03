@@ -1,0 +1,8 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "CustomFootprints") (type "KiCad") (uri "${KIPRJMOD}/CustomFootprints.pretty") (options "") (descr ""))
+	(lib (name "Custom_footprt_sch_and_models") (type "KiCad") (uri "${KIPRJMOD}/Custom_footprt_sch_and_models.pretty") (options "") (descr ""))
+	(lib (name "Custom_footprt_sch_and_models") (type "KiCad") (uri "${KIPRJMOD}/Custom_footprt_sch_and_models/Custom_footprt_sch_and_models.pretty") (options "") (descr ""))
+	(lib (name "Custom_footprt_sch_and_models") (type "KiCad") (uri "${KIPRJMOD}/Custom_footprt_sch_and_models/Custom_footprt_sch_and_models.pretty/Custom_footprt_sch_and_models.pretty") (options "") (descr ""))
+	(lib (name "Custom_footprt_sch_and_models") (type "KiCad") (uri "${KIPRJMOD}/Custom_footprt_sch_and_models/Custom_footprt_sch_and_models.pretty") (options "") (descr ""))
+)

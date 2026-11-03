@@ -1,0 +1,266 @@
+(kicad_symbol_lib
+  (version 20211014)
+  (generator "Easy ECAD Downloader")
+  (symbol "PJ-313D"
+    (in_bom yes)
+    (on_board yes)
+    (property
+    "Reference"
+    "Audio"
+    (id 0)
+    (at 0 7.62 0)
+    (effects (font (size 1.27 1.27) ) )
+  )
+    (property
+    "Value"
+    "PJ-313D"
+    (id 1)
+    (at 0 -10.16 0)
+    (effects (font (size 1.27 1.27) ) )
+  )
+    (property
+    "Footprint"
+    "AUDIO-SMD_PJ-313D"
+    (id 2)
+    (at 0 -12.70 0)
+    (effects (font (size 1.27 1.27) ) hide)
+  )
+    (property
+    "Datasheet"
+    "https://lcsc.com/product-detail/Audio-Connectors_PJ-313D_C95463.html"
+    (id 3)
+    (at 0 -15.24 0)
+    (effects (font (size 1.27 1.27) ) hide)
+  )
+    (property
+    "LCSC Part"
+    "C95463"
+    (id 5)
+    (at 0 -17.78 0)
+    (effects (font (size 1.27 1.27) ) hide)
+  )
+    (symbol "PJ-313D_0_1"
+          (rectangle
+            (start -7.37 0.00)
+            (end -5.33 -5.08)
+            (stroke (width 0) (type default) (color 0 0 0 0))
+            (fill (type background))
+          )
+          (polyline
+            (pts
+              (xy -6.35 2.54)
+              (xy 1.27 2.54)
+            )
+            (stroke (width 0) (type default) (color 0 0 0 0))
+            (fill (type none))
+          )
+          (polyline
+            (pts
+              (xy -6.35 2.54)
+              (xy -6.35 0.00)
+            )
+            (stroke (width 0) (type default) (color 0 0 0 0))
+            (fill (type none))
+          )
+          (polyline
+            (pts
+              (xy 1.27 0.00)
+              (xy -2.54 0.00)
+              (xy -3.30 -1.02)
+              (xy -4.06 0.00)
+            )
+            (stroke (width 0) (type default) (color 0 0 0 0))
+            (fill (type none))
+          )
+          (polyline
+            (pts
+              (xy 1.27 -5.08)
+              (xy -0.76 -5.08)
+              (xy -1.52 -4.06)
+              (xy -2.29 -5.08)
+            )
+            (stroke (width 0) (type default) (color 0 0 0 0))
+            (fill (type none))
+          )
+          (pin unspecified line
+            (at 6.35 2.54 180)
+            (length 5.08)
+            (name "1" (effects (font (size 1.27 1.27))))
+            (number "1" (effects (font (size 1.27 1.27))))
+          )
+          (pin unspecified line
+            (at 6.35 -5.08 180)
+            (length 5.08)
+            (name "2" (effects (font (size 1.27 1.27))))
+            (number "2" (effects (font (size 1.27 1.27))))
+          )
+          (pin unspecified line
+            (at 6.35 0.00 180)
+            (length 5.08)
+            (name "3" (effects (font (size 1.27 1.27))))
+            (number "3" (effects (font (size 1.27 1.27))))
+          )
+    )
+  )
+  (symbol "TF-110"
+      (in_bom yes)
+      (on_board yes)
+      (property
+      "Reference"
+      "Card"
+      (id 0)
+      (at 0 16.51 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+      (property
+      "Value"
+      "TF-110"
+      (id 1)
+      (at 0 -16.51 0)
+      (effects (font (size 1.27 1.27) ) )
+    )
+      (property
+      "Footprint"
+      "TF-SMD_TF-110"
+      (id 2)
+      (at 0 -19.05 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+      (property
+      "Datasheet"
+      "https://lcsc.com/product-detail/Connector-Card-Sockets_XUNPU-TF-110_C266613.html"
+      (id 3)
+      (at 0 -21.59 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+      (property
+      "LCSC Part"
+      "C266613"
+      (id 5)
+      (at 0 -24.13 0)
+      (effects (font (size 1.27 1.27) ) hide)
+    )
+      (symbol "TF-110_0_1"
+            (rectangle
+              (start -15.24 13.97)
+              (end 15.24 -13.97)
+              (stroke (width 0) (type default) (color 0 0 0 0))
+              (fill (type background))
+            )
+            (circle
+              (center -14.60 13.33)
+              (radius 0.38)
+              (stroke (width 0) (type default) (color 0 0 0 0))
+              (fill (type none))
+            )
+            (pin unspecified line
+              (at -17.78 11.43 0)
+              (length 2.54)
+              (name "DAT2" (effects (font (size 1.27 1.27))))
+              (number "1" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 8.89 0)
+              (length 2.54)
+              (name "CD/DAT3" (effects (font (size 1.27 1.27))))
+              (number "2" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 6.35 0)
+              (length 2.54)
+              (name "CMD" (effects (font (size 1.27 1.27))))
+              (number "3" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 3.81 0)
+              (length 2.54)
+              (name "VDD" (effects (font (size 1.27 1.27))))
+              (number "4" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 1.27 0)
+              (length 2.54)
+              (name "CLK" (effects (font (size 1.27 1.27))))
+              (number "5" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 -1.27 0)
+              (length 2.54)
+              (name "VSS" (effects (font (size 1.27 1.27))))
+              (number "6" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 -3.81 0)
+              (length 2.54)
+              (name "DAT0" (effects (font (size 1.27 1.27))))
+              (number "7" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 -6.35 0)
+              (length 2.54)
+              (name "DAT1" (effects (font (size 1.27 1.27))))
+              (number "8" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 -8.89 0)
+              (length 2.54)
+              (name "CD" (effects (font (size 1.27 1.27))))
+              (number "9" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at -17.78 -11.43 0)
+              (length 2.54)
+              (name "GND" (effects (font (size 1.27 1.27))))
+              (number "10" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 -10.16 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "11" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 -7.62 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "12" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 -5.08 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "13" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 -2.54 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "14" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 0.00 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "15" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 2.54 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "16" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 5.08 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "17" (effects (font (size 1.27 1.27))))
+            )
+            (pin unspecified line
+              (at 17.78 7.62 180)
+              (length 2.54)
+              (name "SHELL" (effects (font (size 1.27 1.27))))
+              (number "18" (effects (font (size 1.27 1.27))))
+            )
+      )
+    )
+)
